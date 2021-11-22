@@ -1,0 +1,23 @@
+
+{% load static %}
+{% load myfilters %}
+
+<!-- Breadcrumb Start -->
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Page title</title>
+    </head>
+    <body>
+
+        {% if questions %}
+        {% for q in questions %}
+        <div>
+            <h5>{{forloop.counter}}..{{q.question}}
+            </h5>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+    </body>
+</html>

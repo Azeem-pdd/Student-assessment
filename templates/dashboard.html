@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load myfilters %}
+{% block content %}
+<div class='container'>
+    {% if tests %}
+    <div>
+    {% for test in tests %}
+    
+        <p>{{test.test_title}}
+        </p>
+        {% if test.id|check_test %}
+        <div>
+            <form method='POST' action="">
+            {% csrf_token %}
+            <input hidden type='text' name='test' value='{{test.id}}'>
+            <input hidden type='text' name='stop' value='True'>
+            <button type='submit' class='btn btn-sm'>
+                Stop Responses
+            </button>
+            </div>
+            </form>
+        </div>
+        {% else %}
+        <div>
+            <form method='POST' action="">
+            {% csrf_token %}
+            <input hidden type='text' name='test' value='{{test.id}}'>
+            <input hidden type='text' name='accept' value='True'>
+            <button type='submit' class='btn btn-sm'>
+                Accept Responses
+            </button>
+            </div>
+            </form>
+        </div>
+        
+        {% endif %}
+        <div>
+            <form method='POST' action="">
+            {% csrf_token %}
+            <input hidden type='text' name='test' value='{{test.id}}'>
+            <input hidden type='text' name='copy' value='True'>
+            <button type='submit' class='btn btn-sm'>
+                Copy Link
+            </button>
+            </div>
+            </form>
+        </div>
+        <div>
+            <form method='POST' action="">
+                {% csrf_token %}
+                <input hidden type='text' name='test' value='{{test.id}}'>
+                <input hidden type='text' name='responses' value='True'>
+                <button type='submit' class='btn btn-sm'>
+                    Responses Submitted
+                </button>
+            </form>
+        </div>
+            
+        
+
+    
+    {% endfor %}
+    </div>
+    {% else %}
+        <p>No tests are available. Do you want to create a new test???
+        </p>
+        <div class='container'>
+            <button class='btn btn-lg'>
+                <a href={% url 'create' %}>create a test</a>
+            </button>
+
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

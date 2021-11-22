@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load myfilters %}
+{% block content %}
+<!-- Breadcrumb Start -->
+        <script>
+        function copy(){
+        console.log('link Copied')
+        }
+        </script>
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Tests</a></li>
+                    <li class="breadcrumb-item"><a href="#">Create</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
+        <!-- Login Start -->
+        <div class="login">
+            <div class="container-fluid">
+                <div class="row">
+                    
+                    <div class="col-lg-6">
+                        <div class="login-form">
+                            
+                            <div>
+                                
+                                {% if link is not None %}
+                                <div class="col-md-12">
+                                    <form method='POST'>
+                                    {% csrf_token %}
+                                    <input type='text' value="{{link}}" name='link' id='myinput'><a href="{{link}}">{{link}}</a>
+                                    
+                                    <button onclick="copy()" type="submit" class="btn">copy link</button>
+                                    </form>
+                                </div>
+                                
+                                {% else%}
+                                <div>
+                                {% for q in questions %}
+
+                                    <h5>{{forloop.counter}}..{{q.question}}
+                                    
+
+                                    </h5>
+                                    {% for c in q|fetch_choices %}
+                                    <br>
+                                    <p>------{{forloop.counter}}......{{c.choice}}</p>
+                                    {% endfor %}
+                                {% endfor %}
+                                </div>
+                                <form method='get'>
+                                <div class="col-md-12">
+                                    
+                                    <button class="btn">
+                                    
+                                    <a href='confirm?data="ok"' >Generate link</button>
+                                </div>
+                                </form>
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Login End -->
+        
+{% endblock %}
+                  

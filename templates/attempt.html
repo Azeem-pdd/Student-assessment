@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load myfilters %}
+{% block content %}
+
+<!-- Breadcrumb Start -->
+        
+                <div class="breadcrumb-wrap">
+                    <div class="container-fluid">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Tests</a></li>
+                            <li class="breadcrumb-item"><a href="#">Create</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <!-- Breadcrumb End -->
+                
+                <!-- Login Start -->
+                <div class="login">
+                    <div class="container-fluid">
+                        <div class="row">
+                            
+                            <div class="col-lg-6">
+                                <div class="login-form">
+                                    <div>
+                                        
+                                        {% if questions %}
+                                        <form action='' method="POST">
+                                        {% csrf_token %}
+                                        {% for q in questions %}
+                                        <div>
+                                            <h5>{{forloop.counter}}..{{q.question}}
+                                            
+
+                                            </h5>
+                                            <div>
+                                            {% for c in q|fetch_choices %}
+                                                <fieldset id='{{q.id}}'>
+                                                    <input type="radio" name="{{q.id}}" value="{{c.id}}">
+                                                    <label>{{c.choice}}</label><br>
+                                                </fieldset>
+                                            {% endfor %}
+                                            </div>
+                                        
+                                        </div>
+                                        {% endfor %}
+                                        <div>
+                                            <input hidden type="text" name='questions' value='{{questions}}'>
+                                        </div>
+                                        
+                                        <div class="col-md-12">
+                                            
+                                            <button type='submit' class="btn">
+                                            Submit</button>
+                                        </div>
+                                        </form>
+                                        
+                                        {% elif details %}
+                                        <table>
+                                            <tr>
+                                                <th>Test Total Time:  </th>
+                                                <th>No. of questions:</th>
+                                                <th>Total marks:</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{details.test_total_time}}</td>
+                                                <td>{{details.no_of_questions}}</td>
+                                                <td>{{details.marks}}</td>
+                                            </tr>
+
+                                        </table>
+                                        <div>
+                                            <button class="btn">
+                                        
+                                                <a href='/tests/attempt/{{link}}/continue' >Continue</a>
+                                            </button>
+                                        </div>
+                                        
+                                        {% endif %}
+                                        {% if form %}
+                                        <form action='' method="POST">
+                                        {% csrf_token %}
+                                        <div>
+                                            {{form.as_p}}
+                                        </div>
+                                        <div class="col-md-12">
+                                            
+                                            <button type='submit' class="btn">
+                                            Submit</button>
+                                        </div>
+                                        </form>
+                                        
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Login End -->
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% load myfilters %}
+        <style>
+        .errors(
+            background-color:lightgreen
+        )
+        </style>
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item active">Login</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
+        <!-- Login Start -->
+        <div class="login">
+            <div class="container-fluid">
+                <div class="row">
+                    
+                    <div class="col-lg-6">
+                        <div class="login-form">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    {% if form.errors %}
+                                    <div class='alert alert-warning'>
+                                    
+                                        <p>{{form.email.errors}}
+                                        </p>
+                                    
+                                    </div>
+                                    
+                                    {% endif %}
+                                    {{form.as_p}}
+                                    <div class="col-md-12">
+                                        <button class="btn">Submit</button>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="col-md-12">
+                                        <p> Didn't have an account?<a href="/accounts/register">
+                                        <strong> Create Account </strong> </a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p> Did you forgot password? Don't worry<a href="password_reset">
+                                        <strong> Reset Password </strong> </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Login End -->
+        
+{% endblock %}

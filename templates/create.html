@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Tests</a></li>
+                    <li class="breadcrumb-item"><a href="#">Create</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
+        <!-- Login Start -->
+        <div class="login">
+            <div class="container-fluid">
+                <div class="row">
+                    
+                    <div class="col-lg-6">
+                        <div class="login-form">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    {{form.as_p}}
+                                    <div class="col-md-12">
+                                        <button class="btn">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Login End -->
+        
+{% endblock %}
+                  
